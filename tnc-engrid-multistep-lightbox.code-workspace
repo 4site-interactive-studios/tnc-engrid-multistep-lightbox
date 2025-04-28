@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "../engrid-tnc"
+    },
+    {
+      "path": "../engrid-standalone-multistep-lightbox"
+    }
+  ],
+  "settings": {}
+}
