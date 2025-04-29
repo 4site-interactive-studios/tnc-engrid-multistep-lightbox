@@ -18,6 +18,7 @@ export class DonationLightbox {
       txt_color: "#FFFFFF",
       form_color: "#E5621A",
       url: null,
+      closeURL: null,
       cookie_hours: 24,
       id: "",
     };
@@ -355,6 +356,10 @@ export class DonationLightbox {
     const videoElement = this.overlay.querySelector("video");
     this.sendGAEvent(category, action, label);
     e.preventDefault();
+    if (this.options.closeURL) {
+      window.location.href = this.options.closeURL;
+      return;
+    }
     this.overlay.classList.add("is-hidden");
     document.body.classList.remove("has-DonationLightbox");
     if (videoElement) {

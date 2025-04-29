@@ -9,7 +9,7 @@ This project makes it easy to create links to your Engaging Networks Donation Pa
 ```html
 <script
   defer="defer"
-  src="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10114/donation-lightbox-parent.js"
+  src="https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/2246/donation-lightbox-parent.js"
 ></script>
 ```
 
