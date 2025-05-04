@@ -4,7 +4,7 @@ export class DonationLightbox {
     console.log("DonationLightbox: constructor");
     window.dataLayer = window.dataLayer || [];
     this.defaultOptions = {
-      name: "4Site Multi-Step Splash",
+      name: "TNC Multi-Step Lightbox",
       image: "",
       video: "",
       logo: "",

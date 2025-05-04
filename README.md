@@ -21,29 +21,27 @@ Every option can be set as a data attribute on the `a` tag, or as a JavaScript o
 
 ![Options](options.png "Engrid Multistep Lightbox Options")
 
-- **image** - Main Image of the Lightbox.
-- **video** - Main Video of the Lightbox. If used, the **image** option will be used as a poster image.
+**Options:**
+
+- **name** - Name of the lightbox instance (for analytics/events). Default: "TNC Multi-Step Lightbox"
+- **image** - Main image of the lightbox (used as a poster if video is set).
+- **video** - Main video of the lightbox. If set, the image is used as a poster.
 - **autoplay** - If true, the video will autoplay, be muted, and loop.
-- **logo** - Logo Image Used on the center of the Lightbox. On mobile, it will be scaled down and moved to the top.
-- **logo_position_top** - Position of the Logo Image on the top of the Lightbox.
-- **logo_position_left** - Position of the Logo Image on the left of the Lightbox.
-- **logo_position_right** - Position of the Logo Image on the right of the Lightbox.
-- **logo_position_bottom** - Position of the Logo Image on the bottom of the Lightbox.
-- **divider** - Divider Image Used between the Hero Image and Content.
-- **title** - Title of the Lightbox.
-- **paragraph** - Content of the Lightbox.
-- **bg_color** - HEX color of the left column background.
-- **text_color** - HEX color of the left column text.
-- **form_color** - HEX color for the form theme.
-- **footer** - Content of the footer.
-- **url** - URL of the donation page - use this option if you want the lightbox to automatically open when the page loads.
-- **cookie_hours** - Number of hours to not auto open the lightbox after the user closes it.
-- **cookie_name** - Name of the cookie to set.
-- **trigger** - Can be set to any `int` value (seconds), any `px` value (scroll position in pixels), any `%` value (scroll position in percentage), or `exit` (on exit intent).
-- **gtm_open_event_name** - Name of the Google Tag Manager event to fire when the lightbox opens.
-- **gtm_close_event_name** - Name of the Google Tag Manager event to fire when the lightbox closes.
-- **gtm_suppressed_event_name** - Name of the Google Tag Manager event to fire when the lightbox is suppressed.
-- **confetti** - Can be an array of colors. If empty, no confetti will be shown on the Thank You page.
+- **logo** - Logo image used in the lightbox. On mobile, it is scaled down and moved to the top.
+- **divider** - Divider image used between the hero image/video and content.
+- **title** - Title of the lightbox.
+- **paragraph** - Main content of the lightbox.
+- **mobile_enabled** - If false, disables the lightbox on mobile devices. Default: true.
+- **mobile_title** - Title to display on mobile view.
+- **mobile_paragraph** - Paragraph/content to display on mobile view.
+- **footer** - Content of the footer area.
+- **bg_color** - HEX color for the left column background. Default: #00675a
+- **txt_color** - HEX color for the left column text. Default: #FFFFFF
+- **form_color** - HEX color for the form theme. Default: #E5621A
+- **url** - URL of the donation page. If set, the lightbox can auto-open on page load.
+- **closeURL** - URL to redirect to when the lightbox is closed (optional).
+- **cookie_hours** - Number of hours to not auto-open the lightbox after the user closes it. Default: 24
+- **id** - Custom ID for the lightbox instance (for analytics/events).
 
 Because the page can have multiple lightbox links, you can share options between them by creating a `DonationLightboxOptions` object. Example:
 
@@ -59,14 +57,14 @@ On the example above, the logo and footer will be used for all links.
 **Example of Link Without Lightbox:**
 
 ```html
-<a href="https://netdonor.net/page/92471/donate/1">Give Now</a>
+<a href="https://preserve.nature.org/page/169438/1">Give Now</a>
 ```
 
 **Example of Link With Lightbox:**
 
 ```html
 <a
-  href="https://netdonor.net/page/92471/donate/1"
+  href="https://preserve.nature.org/page/169438/1"
   data-donation-lightbox
   data-title="My Title Test"
   data-paragraph="My paragraph test"
@@ -78,29 +76,23 @@ On the example above, the logo and footer will be used for all links.
 
 ```javascript
 DonationLightboxOptions = {
+  name: "TNC Multi-Step Lightbox",
   image: "",
   video: "",
-  autoplay: false,
-  divider: "",
   logo: "",
-  logo_position_top: "25px",
-  logo_position_left: "25px",
-  logo_position_right: 0,
-  logo_position_bottom: 0,
   title: "",
   paragraph: "",
+  mobile_enabled: true,
+  mobile_title: "",
+  mobile_paragraph: "",
   footer: "",
-  bg_color: "#cde4fc",
-  txt_color: "#074e92",
-  form_color: "#007cf9",
+  bg_color: "#00675a",
+  txt_color: "#FFFFFF",
+  form_color: "#E5621A",
   url: null,
+  closeURL: null,
   cookie_hours: 24,
-  cookie_name: "HideDonationLightbox",
-  trigger: 0, // int-seconds, px-scroll location, %-scroll location, exit-mouse leave
-  gtm_open_event_name: "donation_lightbox_display",
-  gtm_close_event_name: "donation_lightbox_closed",
-  gtm_suppressed_event_name: "donation_lightbox_supressed",
-  confetti: ["#007cf9", "#FFFFFF", "#0041a8"],
+  id: "",
 };
 ```
 
