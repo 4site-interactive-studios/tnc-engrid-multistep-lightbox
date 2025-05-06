@@ -431,6 +431,10 @@ export class DonationLightbox {
         for (const key in this.donationinfo) {
           iFrameUrl.searchParams.append(key, this.donationinfo[key]);
         }
+        // Add ?chain if it doesn't exist
+        if (!iFrameUrl.searchParams.has("chain")) {
+          iFrameUrl.searchParams.append("chain", "");
+        }
         document.getElementById("dl-iframe").src = iFrameUrl
           .toString()
           .replace("/donate/1", "/donate/2");
