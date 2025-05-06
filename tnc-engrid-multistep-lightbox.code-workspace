@@ -8,6 +8,9 @@
     },
     {
       "path": "../engrid-standalone-multistep-lightbox"
+    },
+    {
+      "path": "../engrid"
     }
   ],
   "settings": {}
