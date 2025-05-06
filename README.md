@@ -98,6 +98,12 @@ DonationLightboxOptions = {
 
 ### IMPORTANT: This project only works with the Engaging Networks Pages using the [engrid theme](https://github.com/4site-interactive-studios/engrid) or a client fork of ENgrid.
 
+## Testing Notes
+
+- The embedded EN Multistep Page URL must go directly to the page (HTTP status 200), and not be a redirect (HTTP status 301 or 302). If the page is a redirect, the lightbox will not work.
+
+- If the lightbox is used on a staging website with a different top level domain than the embedded pages top level domain, Safari will experience issues due to security restrictions. To test on a staging domain with a different top level domain, you should use Chrome.
+
 ## Development
 
 Your js code must be on the `src/app` folder. Styling changes must be on `src/scss`.
