@@ -42,6 +42,7 @@ Every option can be set as a data attribute on the `a` tag, or as a JavaScript o
 - **closeURL** - URL to redirect to when the lightbox is closed (optional).
 - **cookie_hours** - Number of hours to not auto-open the lightbox after the user closes it. Default: 24
 - **id** - Custom ID for the lightbox instance (for analytics/events).
+- **background_iframe** - Optional URL to display as an iframe behind the lightbox overlay. When set, the lightbox will appear on top of this background iframe with a semi-transparent overlay. When the lightbox closes, the overlay disappears and the background iframe becomes fully visible and interactive.
 
 Because the page can have multiple lightbox links, you can share options between them by creating a `DonationLightboxOptions` object. Example:
 
@@ -93,6 +94,7 @@ DonationLightboxOptions = {
   closeURL: null,
   cookie_hours: 24,
   id: "",
+  background_iframe: "",
 };
 ```
 

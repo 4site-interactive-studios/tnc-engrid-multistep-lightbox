@@ -8,6 +8,53 @@ $content-font: "Open Sans", sans-serif;
 body.has-DonationLightbox {
   overflow: hidden;
 }
+
+// Background iframe styles
+.foursiteDonationLightbox-background-iframe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-in-out;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  &.is-visible {
+    opacity: 1;
+    pointer-events: none; // Keep pointer-events disabled when overlay is visible
+  }
+
+  &.is-fully-visible {
+    opacity: 1;
+    pointer-events: auto; // Enable pointer-events when lightbox is closed
+  }
+
+  // Add semi-transparent overlay when lightbox is open
+  &.is-visible::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &.is-fully-visible::before {
+    content: none;
+  }
+}
+
 .foursiteDonationLightbox {
   position: fixed;
   top: 0;

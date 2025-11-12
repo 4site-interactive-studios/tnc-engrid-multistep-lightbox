@@ -21,6 +21,7 @@ export class DonationLightbox {
       closeURL: null,
       cookie_hours: 24,
       id: "",
+      background_iframe: "",
     };
     this.donationinfo = {};
     this.options = { ...this.defaultOptions };
@@ -95,6 +96,9 @@ export class DonationLightbox {
     }
     if ("id" in data) {
       this.options.id = data.id;
+    }
+    if ("background_iframe" in data) {
+      this.options.background_iframe = data.background_iframe;
     }
   }
   init() {
@@ -270,11 +274,11 @@ export class DonationLightbox {
     overlay.innerHTML = markup;
     const closeButton = overlay.querySelector(".dl-button-close");
     closeButton.addEventListener("click", this.close.bind(this));
-    overlay.addEventListener("click", (e) => {
-      if (e.target.id == this.overlayID) {
-        this.close(e);
-      }
-    });
+    // overlay.addEventListener("click", (e) => {
+    //   if (e.target.id == this.overlayID) {
+    //     this.close(e);
+    //   }
+    // });
 
     const closeViewMore = overlay.querySelector(".dl-close-viewmore");
     closeViewMore.addEventListener("click", (e) => {
@@ -337,9 +341,35 @@ export class DonationLightbox {
       ).style.display = "none";
     }
     this.overlay = overlay;
+
+    // Create background iframe if background_iframe option is provided
+    if (this.options.background_iframe) {
+      this.createBackgroundIframe();
+    }
+
     document.body.appendChild(overlay);
     this.open();
   }
+  createBackgroundIframe() {
+    // Remove existing background iframe if it exists
+    if (this.backgroundIframe && this.backgroundIframe.parentNode) {
+      this.backgroundIframe.parentNode.removeChild(this.backgroundIframe);
+    }
+
+    // Create background iframe container
+    this.backgroundIframeID =
+      "foursite-bg-" + Math.random().toString(36).substring(7);
+    let backgroundIframe = document.createElement("div");
+    backgroundIframe.id = this.backgroundIframeID;
+    backgroundIframe.classList.add(
+      "foursiteDonationLightbox-background-iframe"
+    );
+    backgroundIframe.innerHTML = `<iframe src="${this.options.background_iframe}" frameborder="0" allowfullscreen sandbox="allow-same-origin"></iframe>`;
+
+    this.backgroundIframe = backgroundIframe;
+    document.body.appendChild(backgroundIframe);
+  }
+
   open() {
     const action = window.petaGA_GenericAction_Viewed ?? "Viewed";
     const category = window.petaGA_SplashCategory ?? "Splash Page";
@@ -347,6 +377,11 @@ export class DonationLightbox {
     this.sendGAEvent(category, action, label);
     this.overlay.classList.remove("is-hidden");
     document.body.classList.add("has-DonationLightbox");
+
+    // Show background iframe if it exists
+    if (this.backgroundIframe) {
+      this.backgroundIframe.classList.add("is-visible");
+    }
   }
 
   close(e) {
@@ -364,6 +399,12 @@ export class DonationLightbox {
     document.body.classList.remove("has-DonationLightbox");
     if (videoElement) {
       videoElement.pause();
+    }
+
+    // Remove overlay transparency from background iframe to make it fully visible
+    if (this.backgroundIframe) {
+      this.backgroundIframe.classList.remove("is-visible");
+      this.backgroundIframe.classList.add("is-fully-visible");
     }
     if (this.options.url) {
       this.setCookie(this.options.cookie_hours);
