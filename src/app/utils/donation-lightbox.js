@@ -22,6 +22,7 @@ export class DonationLightbox {
       cookie_hours: 24,
       id: "",
       background_iframe: "",
+      one_column: false,
     };
     this.donationinfo = {};
     this.options = { ...this.defaultOptions };
@@ -100,6 +101,13 @@ export class DonationLightbox {
     if ("background_iframe" in data) {
       this.options.background_iframe = data.background_iframe;
     }
+    if (this.options.one_column) {
+      console.log("one_column data attribute is present");
+    }
+    if ("one_column" in data) {
+      this.options.one_column = data.one_column;
+      console.log("one_column option set to: ", this.options.one_column);
+    }
   }
   init() {
     console.log("DonationLightbox: init");
@@ -165,60 +173,64 @@ export class DonationLightbox {
             : ""
         }
         <div class="dl-content">
-          <div class="left" style="background-color: ${
-            this.options.bg_color
-          }; color: ${this.options.txt_color}">
-            ${
-              this.options.logo
-                ? `<img class="dl-logo" src="${this.options.logo}" alt="${this.options.title}">`
-                : ""
-            }
-            <a href="#" class="dl-close-viewmore" style="color: ${
-              this.options.bg_color
-            };">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
-                <path fill="currentColor" d="M7.214.786c.434-.434 1.138-.434 1.572 0 .433.434.433 1.137 0 1.571L4.57 6.572h10.172c.694 0 1.257.563 1.257 1.257s-.563 1.257-1.257 1.257H4.229l4.557 4.557c.433.434.433 1.137 0 1.571-.434.434-1.138.434-1.572 0L0 8 7.214.786z"></path>
-              </svg>
-            </a>
-            <div class="dl-container">
-              ${this.loadHero()}
+          ${
+            this.options.one_column === false
+              ? `<div class="left" style="background-color: ${
+                  this.options.bg_color
+                }; color: ${this.options.txt_color}">
               ${
-                this.options.divider
-                  ? `<img class="dl-divider" src="${this.options.divider}" alt="Divider">`
+                this.options.logo
+                  ? `<img class="dl-logo" src="${this.options.logo}" alt="${this.options.title}">`
                   : ""
               }
-              <div class="dl-container-inner" style="background-color: ${
+              <a href="#" class="dl-close-viewmore" style="color: ${
                 this.options.bg_color
-              }; color: ${this.options.txt_color}">
-                <h1 class="dl-title" style="color: ${this.options.txt_color}">${
-      this.options.title
-    }</h1>
-                <p class="dl-paragraph" style="color: ${
-                  this.options.txt_color
-                }">${this.options.paragraph}</p>
-                <a class="dl-viewmore" href="#"style="color: ${
-                  this.options.txt_color
-                }; border-color: ${this.options.txt_color}"> 
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                  <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd" />
+              };">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
+                  <path fill="currentColor" d="M7.214.786c.434-.434 1.138-.434 1.572 0 .433.434.433 1.137 0 1.571L4.57 6.572h10.172c.694 0 1.257.563 1.257 1.257s-.563 1.257-1.257 1.257H4.229l4.557 4.557c.433.434.433 1.137 0 1.571-.434.434-1.138.434-1.572 0L0 8 7.214.786z"></path>
                 </svg>
-                <span>Read More</span></a>
+              </a>
+              <div class="dl-container">
+                ${this.loadHero()}
+                ${
+                  this.options.divider
+                    ? `<img class="dl-divider" src="${this.options.divider}" alt="Divider">`
+                    : ""
+                }
+                <div class="dl-container-inner" style="background-color: ${
+                  this.options.bg_color
+                }; color: ${this.options.txt_color}">
+                  <h1 class="dl-title" style="color: ${
+                    this.options.txt_color
+                  }">${this.options.title}</h1>
+                  <p class="dl-paragraph" style="color: ${
+                    this.options.txt_color
+                  }">${this.options.paragraph}</p>
+                  <a class="dl-viewmore" href="#"style="color: ${
+                    this.options.txt_color
+                  }; border-color: ${this.options.txt_color}"> 
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                    <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd" />
+                  </svg>
+                  <span>Read More</span></a>
+                </div>
+                <div class="dl-celebration">
+                  <div class="frame frame1">
+                      <h3>and the animals</h3>
+                      <h2>THANK YOU!</h2>
+                  </div>
+                  <div class="frame frame2">
+                    <div id="bunnyAnimation"></div>
+                  </div>
+                  <div class="frame frame3">
+                    <h2 class="name">Fernando,</h2>
+                    <h2 class="phrase">you are a hero <br>to animals.</h2>
+                  </div>
+                </div>
               </div>
-              <div class="dl-celebration">
-                <div class="frame frame1">
-                    <h3>and the animals</h3>
-                    <h2>THANK YOU!</h2>
-                </div>
-                <div class="frame frame2">
-                  <div id="bunnyAnimation"></div>
-                </div>
-                <div class="frame frame3">
-                  <h2 class="name">Fernando,</h2>
-                  <h2 class="phrase">you are a hero <br>to animals.</h2>
-                </div>
-              </div>
-            </div>
-          </div>
+            </div>`
+              : ""
+          }
           <div class="right">
             <a href="#" class="dl-button-close"></a>
             <div class="dl-loading" style="background-color: ${
@@ -281,16 +293,20 @@ export class DonationLightbox {
     // });
 
     const closeViewMore = overlay.querySelector(".dl-close-viewmore");
-    closeViewMore.addEventListener("click", (e) => {
-      e.preventDefault();
-      overlay.querySelector(".left").classList.remove("view-more");
-    });
+    if (closeViewMore) {
+      closeViewMore.addEventListener("click", (e) => {
+        e.preventDefault();
+        overlay.querySelector(".left")?.classList.remove("view-more");
+      });
+    }
 
     const viewmore = overlay.querySelector(".dl-viewmore");
-    viewmore.addEventListener("click", (e) => {
-      e.preventDefault();
-      overlay.querySelector(".left").classList.add("view-more");
-    });
+    if (viewmore) {
+      viewmore.addEventListener("click", (e) => {
+        e.preventDefault();
+        overlay.querySelector(".left")?.classList.add("view-more");
+      });
+    }
 
     const videoElement = overlay.querySelector("video");
     if (videoElement) {
@@ -377,6 +393,9 @@ export class DonationLightbox {
     this.sendGAEvent(category, action, label);
     this.overlay.classList.remove("is-hidden");
     document.body.classList.add("has-DonationLightbox");
+    if (this.options.one_column) {
+      document.body.classList.add("has-OneColumnDonationLightbox");
+    }
 
     // Show background iframe if it exists
     if (this.backgroundIframe) {
@@ -396,7 +415,10 @@ export class DonationLightbox {
       return;
     }
     this.overlay.classList.add("is-hidden");
-    document.body.classList.remove("has-DonationLightbox");
+    document.body.classList.remove(
+      "has-DonationLightbox",
+      "has-OneColumnDonationLightbox"
+    );
     if (videoElement) {
       videoElement.pause();
     }
@@ -426,6 +448,14 @@ export class DonationLightbox {
         document
           .querySelector(".foursiteDonationLightbox")
           .classList.add(message.value);
+        break;
+      case "frameHeight":
+        console.log(
+          "DonationLightbox: receiveMessage: frameHeight: ",
+          message.value
+        );
+        document.getElementById("dl-iframe").style.height =
+          message.value + "px";
         break;
       case "donationinfo":
         this.donationinfo = JSON.parse(message.value);
@@ -589,8 +619,10 @@ export class DonationLightbox {
       return;
     }
 
-    // Left Animation
-    leftContainer.classList.add("celebrating");
+    if (leftContainer) {
+      // Left Animation
+      leftContainer.classList.add("celebrating");
+    }
   }
   shake() {
     const element = document.querySelector(".dl-content");
