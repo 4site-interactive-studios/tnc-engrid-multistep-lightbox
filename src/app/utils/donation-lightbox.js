@@ -101,12 +101,8 @@ export class DonationLightbox {
     if ("background_iframe" in data) {
       this.options.background_iframe = data.background_iframe;
     }
-    if (this.options.one_column) {
-      console.log("one_column data attribute is present");
-    }
-    if ("one_column" in data) {
-      this.options.one_column = data.one_column;
-      console.log("one_column option set to: ", this.options.one_column);
+    if ("oneColumn" in data) {
+      this.options.one_column = true;
     }
   }
   init() {
