@@ -445,14 +445,6 @@ export class DonationLightbox {
           .querySelector(".foursiteDonationLightbox")
           .classList.add(message.value);
         break;
-      case "frameHeight":
-        console.log(
-          "DonationLightbox: receiveMessage: frameHeight: ",
-          message.value
-        );
-        document.getElementById("dl-iframe").style.height =
-          message.value + "px";
-        break;
       case "donationinfo":
         this.donationinfo = JSON.parse(message.value);
         console.log(
@@ -480,6 +472,47 @@ export class DonationLightbox {
         );
         break;
     }
+
+    // Parent Page Logic (when an ENgrid form is embedded in an ENgrid page)
+    if (this.options.one_column) {
+      const iframe = document.getElementById("dl-iframe");
+
+      if (iframe) {
+        if (event.data.hasOwnProperty("frameHeight")) {
+          iframe.style.height = event.data.frameHeight + "px";
+          // if (event.data.frameHeight > 0) {
+          //   iframe.classList.add("loaded");
+          // } else {
+          //   iframe.classList.remove("loaded");
+          // }
+        }
+        // Old scroll event logic "scroll", scrolls to correct iframe?
+        else if (event.data.hasOwnProperty("scroll") && event.data.scroll > 0) {
+          const elDistanceToTop =
+            window.pageYOffset + iframe.getBoundingClientRect().top;
+          let scrollTo = elDistanceToTop + event.data.scroll;
+          window.scrollTo({
+            top: scrollTo,
+            left: 0,
+            behavior: "smooth",
+          });
+          console.log("iFrame Event - Scrolling Window to " + scrollTo);
+        }
+        // New scroll event logic "scrollTo", scrolls to the first error
+        else if (event.data.hasOwnProperty("scrollTo")) {
+          const scrollToPosition =
+            event.data.scrollTo +
+            window.scrollY +
+            iframe.getBoundingClientRect().top;
+          window.scrollTo({
+            top: scrollToPosition,
+            left: 0,
+            behavior: "smooth",
+          });
+          console.log("iFrame Event - Scrolling Window to " + scrollToPosition);
+        }
+      }
+    }
   }
   status(status, event) {
     switch (status) {
@@ -488,6 +521,9 @@ export class DonationLightbox {
         break;
       case "loaded":
         document.querySelector(".dl-loading").classList.add("is-loaded");
+        if (this.options.one_column) {
+          window.scrollTo(0, 0);
+        }
         break;
       case "submitted":
         this.donationinfo.frequency =
@@ -515,6 +551,10 @@ export class DonationLightbox {
           this.celebrate(false);
         } else {
           this.celebrate(true);
+        }
+        if (this.options.one_column) {
+          console.log("Scrolling to top for one_column layout");
+          window.scrollTo(0, 0);
         }
         break;
       case "footer":
