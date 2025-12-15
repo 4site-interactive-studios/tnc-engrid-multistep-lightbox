@@ -13,6 +13,8 @@ body.has-DonationLightbox {
     max-height: 100vh;
     .foursiteDonationLightbox {
       height: max(100%, 100vh);
+      justify-content: center !important;
+      align-items: center !important;
       .foursiteDonationLightbox-container {
         max-height: none;
         min-height: 100%;
