@@ -488,18 +488,33 @@ export class DonationLightbox {
         }
         // Old scroll event logic "scroll", scrolls to correct iframe?
         else if (event.data.hasOwnProperty("scroll") && event.data.scroll > 0) {
-          const elDistanceToTop =
-            window.pageYOffset + iframe.getBoundingClientRect().top;
+          const elDistanceToTop = window.pageYOffset;
           let scrollToPosition = elDistanceToTop + event.data.scroll;
           this.scrollTo(scrollToPosition);
           console.log("iFrame Event - Scrolling Window to " + scrollToPosition);
         }
         // New scroll event logic "scrollTo", scrolls to the first error
         else if (event.data.hasOwnProperty("scrollTo")) {
-          const scrollToPosition =
-            event.data.scrollTo +
-            window.scrollY +
-            iframe.getBoundingClientRect().top;
+          const scrollToPosition = event.data.scrollTo + window.scrollY;
+
+          console.log(
+            "[iFrame Event - scrollTo] event.data.scrollTo: " +
+              event.data.scrollTo
+          );
+          console.log(
+            "[iFrame Event - scrollTo] window.scrollY: " + window.scrollY
+          );
+          console.log(
+            "[iFrame Event - scrollTo] iframe.getBoundingClientRect().top: " +
+              iframe.getBoundingClientRect().top
+          );
+          console.log(
+            "[iFrame Event - scrollTo] '.foursiteDonationLightbox'.getBoundingClientRect().top: " +
+              document
+                .querySelector(".foursiteDonationLightbox")
+                .getBoundingClientRect().top
+          );
+
           this.scrollTo(scrollToPosition);
         }
       }
