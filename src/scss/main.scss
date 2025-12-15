@@ -31,6 +31,7 @@ body.has-DonationLightbox {
             margin: 0;
             height: auto;
             max-width: 660px;
+            padding: 0;
             .dl-loading {
               &.is-loaded {
                 top: -99999px;
