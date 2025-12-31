@@ -31,10 +31,12 @@ body.has-DonationLightbox {
           height: auto;
           .right {
             margin: 0;
+            min-height: 100vh;
             height: auto;
             max-width: 660px;
             padding: 0;
             .dl-loading {
+              min-height: 100vh;
               &.is-loaded {
                 top: -99999px;
               }
