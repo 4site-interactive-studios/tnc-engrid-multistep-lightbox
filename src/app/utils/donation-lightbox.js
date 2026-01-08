@@ -101,7 +101,7 @@ export class DonationLightbox {
     if ("background_iframe" in data) {
       this.options.background_iframe = data.background_iframe;
     }
-    if ("oneColumn" in data) {
+    if ("oneStep" in data) {
       this.options.one_step = true;
     }
   }
@@ -390,7 +390,7 @@ export class DonationLightbox {
     this.overlay.classList.remove("is-hidden");
     document.body.classList.add("has-DonationLightbox");
     if (this.options.one_step) {
-      document.body.classList.add("has-OneColumnDonationLightbox");
+      document.body.classList.add("has-oneStepDonationLightbox");
     }
 
     // Show background iframe if it exists
@@ -413,7 +413,7 @@ export class DonationLightbox {
     this.overlay.classList.add("is-hidden");
     document.body.classList.remove(
       "has-DonationLightbox",
-      "has-OneColumnDonationLightbox"
+      "has-oneStepDonationLightbox"
     );
     if (videoElement) {
       videoElement.pause();
