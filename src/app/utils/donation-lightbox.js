@@ -512,6 +512,11 @@ export class DonationLightbox {
         "iFrame Event - Scrolling .foursiteDonationLightbox to " +
           scrollToPosition
       );
+    } else {
+      console.log(
+        "iFrame Event - .foursiteDonationLightbox not found, cannot scroll to " +
+          scrollToPosition
+      );
     }
   }
   status(status, event) {
@@ -522,7 +527,7 @@ export class DonationLightbox {
       case "loaded":
         document.querySelector(".dl-loading").classList.add("is-loaded");
         if (this.options.one_step) {
-          window.scrollTo(0, 0);
+          this.scrollTo(0);
         }
         break;
       case "submitted":
@@ -553,8 +558,7 @@ export class DonationLightbox {
           this.celebrate(true);
         }
         if (this.options.one_step) {
-          console.log("Scrolling to top for one_step layout");
-          window.scrollTo(0, 0);
+          this.scrollTo(0);
         }
         break;
       case "footer":
