@@ -43,7 +43,7 @@ Every option can be set as a data attribute on the `a` tag, or as a JavaScript o
 - **cookie_hours** - Number of hours to not auto-open the lightbox after the user closes it. Default: 24
 - **id** - Custom ID for the lightbox instance (for analytics/events).
 - **background_iframe** - Optional URL to display as an iframe behind the lightbox overlay. When set, the lightbox will appear on top of this background iframe with a semi-transparent overlay. When the lightbox closes, the overlay disappears and the background iframe becomes fully visible and interactive.
-- **one_column** - If set to true, the lightbox switches from the standard multi-step layout to a one-column, single-step layout. In this mode, all content is displayed in a unified vertical flow with scroll. Default: false
+- **one_step** - If set to true, the lightbox switches from the standard multi-step flow to a one-step donation flow. Default: false
 
 Because the page can have multiple lightbox links, you can share options between them by creating a `DonationLightboxOptions` object. Example:
 
@@ -96,7 +96,7 @@ DonationLightboxOptions = {
   cookie_hours: 24,
   id: "",
   background_iframe: "",
-  one_column: false,
+  one_step: false,
 };
 ```
 

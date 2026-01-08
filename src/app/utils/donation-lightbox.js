@@ -22,7 +22,7 @@ export class DonationLightbox {
       cookie_hours: 24,
       id: "",
       background_iframe: "",
-      one_column: false,
+      one_step: false,
     };
     this.donationinfo = {};
     this.options = { ...this.defaultOptions };
@@ -102,7 +102,7 @@ export class DonationLightbox {
       this.options.background_iframe = data.background_iframe;
     }
     if ("oneColumn" in data) {
-      this.options.one_column = true;
+      this.options.one_step = true;
     }
   }
   init() {
@@ -170,7 +170,7 @@ export class DonationLightbox {
         }
         <div class="dl-content">
           ${
-            this.options.one_column === false
+            this.options.one_step === false
               ? `<div class="left" style="background-color: ${
                   this.options.bg_color
                 }; color: ${this.options.txt_color}">
@@ -389,7 +389,7 @@ export class DonationLightbox {
     this.sendGAEvent(category, action, label);
     this.overlay.classList.remove("is-hidden");
     document.body.classList.add("has-DonationLightbox");
-    if (this.options.one_column) {
+    if (this.options.one_step) {
       document.body.classList.add("has-OneColumnDonationLightbox");
     }
 
@@ -474,7 +474,7 @@ export class DonationLightbox {
     }
 
     // Parent Page Logic (when an ENgrid form is embedded in an ENgrid page)
-    if (this.options.one_column) {
+    if (this.options.one_step) {
       const iframe = document.getElementById("dl-iframe");
 
       if (iframe) {
@@ -521,7 +521,7 @@ export class DonationLightbox {
         break;
       case "loaded":
         document.querySelector(".dl-loading").classList.add("is-loaded");
-        if (this.options.one_column) {
+        if (this.options.one_step) {
           window.scrollTo(0, 0);
         }
         break;
@@ -552,8 +552,8 @@ export class DonationLightbox {
         } else {
           this.celebrate(true);
         }
-        if (this.options.one_column) {
-          console.log("Scrolling to top for one_column layout");
+        if (this.options.one_step) {
+          console.log("Scrolling to top for one_step layout");
           window.scrollTo(0, 0);
         }
         break;
